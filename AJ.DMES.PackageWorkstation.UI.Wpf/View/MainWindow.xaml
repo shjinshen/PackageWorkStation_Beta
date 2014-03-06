@@ -1,0 +1,32 @@
+﻿<dx:DXWindow
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxt="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:dxco="http://schemas.devexpress.com/winfx/2008/xaml/controls"
+    xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui"
+    xmlns:dxwuin="http://schemas.devexpress.com/winfx/2008/xaml/windowsui/navigation"
+    xmlns:local="clr-namespace:AJ.DMES.PackageWorkstation.UI.Wpf"
+    xmlns:ViewModel="clr-namespace:AJ.DMES.PackageWorkstation.UI.Wpf.ViewModel"
+    xmlns:View="clr-namespace:AJ.DMES.PackageWorkstation.UI.Wpf.View"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" 
+    x:Class="AJ.DMES.PackageWorkstation.UI.Wpf.View.MainWindow"
+    WindowStartupLocation="CenterScreen"
+    Title="AJ DMES Package Platform Demo Version 1.0.0.1" 
+    Height="730" Width="1300" MinHeight="600" MinWidth="1000" 
+    ShowIcon="False" ShowTitle="False" WindowState="Maximized">
+    <dx:DXWindow.DataContext>
+        <ViewModel:MainViewModel/>
+    </dx:DXWindow.DataContext>
+    <dxmvvm:Interaction.Triggers>
+        <dxmvvm:EventToCommand EventName="Loaded" Command="{Binding OnViewLoadedCommand}"/>
+    </dxmvvm:Interaction.Triggers>
+    <dxmvvm:Interaction.Behaviors>
+        <dxwuin:FrameNavigationService Frame="{Binding ElementName=frame}"/>
+        <dx:DXSplashScreenService SplashScreenType="{x:Type View:WaitWindow}"/>
+    </dxmvvm:Interaction.Behaviors>
+    <Grid>
+        <dxwui:NavigationFrame x:Name="frame"/>
+    </Grid>
+</dx:DXWindow>
