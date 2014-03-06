@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AJ.DMES.PackageWorkstation.UI.Wpf", "AJ.DMES.PackageWorkstation.UI.Wpf\AJ.DMES.PackageWorkstation.UI.Wpf.csproj", "{A2959E96-487C-4E58-8073-BE48BED8655D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AJ.DMES.PackageWorkstation.Domain", "AJ.DMES.PackageWorkstation.Domain\AJ.DMES.PackageWorkstation.Domain.csproj", "{67A98AD3-8908-454B-ADC8-5D89EEA375A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{A2959E96-487C-4E58-8073-BE48BED8655D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2959E96-487C-4E58-8073-BE48BED8655D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2959E96-487C-4E58-8073-BE48BED8655D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67A98AD3-8908-454B-ADC8-5D89EEA375A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67A98AD3-8908-454B-ADC8-5D89EEA375A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67A98AD3-8908-454B-ADC8-5D89EEA375A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67A98AD3-8908-454B-ADC8-5D89EEA375A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
