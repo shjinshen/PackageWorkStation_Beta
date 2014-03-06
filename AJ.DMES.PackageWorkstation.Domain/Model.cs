@@ -18,7 +18,12 @@ namespace AJ.DMES.PackageWorkstation.Domain
 {
     public class Model : Entity
     {
-        public string ModelID { get; set; }
+        public string ModelName { get; set; }
         public string Description { get; set; }
+        public string Reservation_1 { get; set; }
+        public string Reservation_2 { get; set; }
+        public string Reservation_3 { get; set; }
+        public string Reservation_4 { get; set; }
+        public string Reservation_5 { get; set; }
     }
 }

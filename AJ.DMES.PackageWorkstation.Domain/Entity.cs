@@ -16,10 +16,13 @@ using System.Text;
 
 namespace AJ.DMES.PackageWorkstation.Domain
 {
+    #region 基类
     public abstract class Entity<TId>
     {
         public virtual TId Id { get; protected set; }
         public virtual int Version { get; set; }
+        public virtual DateTime CreatedDateTime { get; set; }
+        public virtual DateTime ModifiedDateTime { get; set; }
 
         public override bool Equals(object obj)
         {
@@ -62,7 +65,11 @@ namespace AJ.DMES.PackageWorkstation.Domain
             return GetType();
         }
     }
+    #endregion
 
+    /// <summary>
+    /// 实体类继承的基类
+    /// </summary>
     public abstract class Entity : Entity<Guid>
     {
     }
