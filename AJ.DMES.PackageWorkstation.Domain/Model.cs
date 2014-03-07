@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NHibernate.Mapping.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,12 +19,18 @@ namespace AJ.DMES.PackageWorkstation.Domain
 {
     public class Model : Entity
     {
-        public string ModelName { get; set; }
-        public string Description { get; set; }
-        public string Reservation_1 { get; set; }
-        public string Reservation_2 { get; set; }
-        public string Reservation_3 { get; set; }
-        public string Reservation_4 { get; set; }
-        public string Reservation_5 { get; set; }
+        public virtual string ModelName { get; set; }
+
+        public virtual string Description { get; set; }
+
+        public virtual string Reservation_1 { get; set; }
+
+        public virtual string Reservation_2 { get; set; }
+
+        public virtual string Reservation_3 { get; set; }
+
+        public virtual string Reservation_4 { get; set; }
+
+        public virtual string Reservation_5 { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NHibernate.Mapping.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,8 +21,11 @@ namespace AJ.DMES.PackageWorkstation.Domain
     public abstract class Entity<TId>
     {
         public virtual TId Id { get; protected set; }
+
         public virtual int Version { get; set; }
+
         public virtual DateTime CreatedDateTime { get; set; }
+
         public virtual DateTime ModifiedDateTime { get; set; }
 
         public override bool Equals(object obj)

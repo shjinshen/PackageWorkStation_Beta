@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
+                   assembly="AJ.DMES.PackageWorkstation.Domain" namespace="AJ.DMES.PackageWorkstation.Domain">
+  <class name="Model" table="T_Model">
+
+    <id name="Id" column="Id" length="32">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" column="Ver"/>
+    <property name="ModelName" length="30"/>
+    <property name="Description" length="200"/>
+    <property name="Reservation_1"/>
+    <property name="Reservation_2"/>
+    <property name="Reservation_3"/>
+    <property name="Reservation_4"/>
+    <property name="Reservation_5"/>
+  </class>
+</hibernate-mapping>

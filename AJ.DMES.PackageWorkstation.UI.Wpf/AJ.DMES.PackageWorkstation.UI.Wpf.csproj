@@ -54,6 +54,18 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\DLL\Others\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\DLL\Others\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.DynamicProxy">
+      <HintPath>..\DLL\Others\Castle.DynamicProxy.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.DynamicProxy2">
+      <HintPath>..\DLL\Others\Castle.DynamicProxy2.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.Charts.v13.1.Core, Version=13.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>D:\Program Files\DevExpress\DXperience 13.1\Bin\Framework\DevExpress.Charts.v13.1.Core.dll</HintPath>
@@ -111,6 +123,15 @@
     <Reference Include="DevExpress.XtraTreeList.v13.1, Version=13.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>D:\Program Files\DevExpress\DXperience 13.1\Bin\Framework\DevExpress.XtraTreeList.v13.1.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\DLL\Log4net\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Core">
+      <HintPath>..\DLL\Spring.net\net\4.0\release\Spring.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Data">
+      <HintPath>..\DLL\Spring.net\net\4.0\release\Spring.Data.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -269,6 +290,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="App.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -309,7 +331,16 @@
     <Resource Include="Images\UserManagment.png" />
     <Resource Include="Images\ZillowLogo.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\AJ.DMES.PackageWorkstation.Manager\AJ.DMES.PackageWorkstation.Manager.csproj">
+      <Project>{eb28d473-2e95-42c1-b721-36da720c48d4}</Project>
+      <Name>AJ.DMES.PackageWorkstation.Manager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AJ.DMES.PackageWorkstation.Repository\AJ.DMES.PackageWorkstation.Repository.csproj">
+      <Project>{c56e02ad-a820-4eaa-a306-da418cf4dbb4}</Project>
+      <Name>AJ.DMES.PackageWorkstation.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\User\user_add.png" />
     <Resource Include="Images\User\user_delete.png" />
