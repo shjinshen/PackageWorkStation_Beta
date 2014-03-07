@@ -30,8 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MySql.Data">
-      <HintPath>..\DLL\Drivers\MySql.Data.dll</HintPath>
+    <Reference Include="MySql.Data, Version=5.2.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Drivers\MySql.Data_5.2.3.0\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="Spring.Core">
       <HintPath>..\DLL\Spring.net\net\4.0\release\Spring.Core.dll</HintPath>

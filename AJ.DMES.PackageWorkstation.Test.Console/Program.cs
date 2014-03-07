@@ -21,13 +21,7 @@ namespace AJ.DMES.PackageWorkstation.Test.Console
                 IApplicationContext applicationContext = ContextRegistry.GetContext();
                 IModelManager modelManager =
                     (IModelManager)applicationContext.GetObject("ModelManager");
-                Model model = new Model()
-                {
-                    ModelName = "Test",
-                    Description = "ssssss"
-                };
 
-                modelManager.Save(model);
             }
             catch (Exception ex)
             { 

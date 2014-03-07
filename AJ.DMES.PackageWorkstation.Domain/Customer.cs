@@ -18,12 +18,12 @@ namespace AJ.DMES.PackageWorkstation.Domain
 {
     public class Customer : Entity
     {
-        public string CustomerCode { get; set; }
-        public string CustomerName { get; set; }
-        public string ShortName { get; set; }
-        public string Address { get; set; }
-        public string Phone { get; set; }
-        public string ZipCode { get; set; }
-        public string WebSite { get; set; }
+        public virtual string CustomerCode { get; set; }
+        public virtual string CustomerName { get; set; }
+        public virtual string ShortName { get; set; }
+        public virtual string Address { get; set; }
+        public virtual string Phone { get; set; }
+        public virtual string ZipCode { get; set; }
+        public virtual string WebSite { get; set; }
     }
 }
