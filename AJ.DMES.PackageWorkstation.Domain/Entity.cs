@@ -20,13 +20,13 @@ namespace AJ.DMES.PackageWorkstation.Domain
     #region 基类
     public abstract class Entity<TId>
     {
-        public virtual TId IId { get; protected set; }
+        public virtual TId Id { get; protected set; }
 
-        public virtual int RowVersion { get; set; }
+        public virtual int Version { get; set; }
 
-        //public virtual DateTime CreatedDateTime { get; set; }
+        public virtual DateTime? CreatedDateTime { get; set; }
 
-        //public virtual DateTime ModifiedDateTime { get; set; }
+        public virtual DateTime? ModifiedDateTime { get; set; }
 
         public override bool Equals(object obj)
         {
@@ -41,7 +41,7 @@ namespace AJ.DMES.PackageWorkstation.Domain
                 return true;
             if (!IsTransient(this)
                && !IsTransient(other)
-               && Equals(IId, other.IId))
+               && Equals(Id, other.Id))
             {
                 var otherType = other.GetUnProxiedType();
                 var thisType = GetUnProxiedType();
@@ -54,14 +54,14 @@ namespace AJ.DMES.PackageWorkstation.Domain
 
         public override int GetHashCode()
         {
-            if (Equals(IId, default(TId)))
+            if (Equals(Id, default(TId)))
                 return base.GetHashCode();
-            return IId.GetHashCode();
+            return Id.GetHashCode();
         }
 
         private static bool IsTransient(Entity<TId> obj)
         {
-            return obj != null && Equals(obj.IId, default(TId));
+            return obj != null && Equals(obj.Id, default(TId));
         }
 
         private Type GetUnProxiedType()
@@ -74,7 +74,7 @@ namespace AJ.DMES.PackageWorkstation.Domain
     /// <summary>
     /// 实体类继承的基类
     /// </summary>
-    public abstract class Entity : Entity<int>
+    public abstract class Entity : Entity<Guid>
     {
     }
 }

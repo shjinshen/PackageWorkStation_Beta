@@ -42,7 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ABC.cs" />
     <Compile Include="Container.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="Entity.cs" />
@@ -51,7 +50,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Mapping\ABC.hbm.xml" />
+    <EmbeddedResource Include="Mapping\Model.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
