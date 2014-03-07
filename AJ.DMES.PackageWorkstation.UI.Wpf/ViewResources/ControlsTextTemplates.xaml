@@ -1,0 +1,54 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <!--Button 文本-->
+    <sys:String x:Key="str_Ok">Ok</sys:String>
+    <sys:String x:Key="str_Cancel">Cancel</sys:String>
+    <sys:String x:Key="str_Add">AddModel</sys:String>
+    <sys:String x:Key="str_Edit">EditModel</sys:String>
+    <sys:String x:Key="str_Save">Save</sys:String>
+    <sys:String x:Key="str_Delete">DeleteMode</sys:String>
+    <sys:String x:Key="str_Query">Query</sys:String>
+    <sys:String x:Key="Clear">Clear</sys:String>
+    
+    <!--Label 文本-->
+    <!--AJ DMES Package Operation 界面标签文本-->
+    <sys:String x:Key="str_DelphiPN">Delphi PN:</sys:String>
+    <sys:String x:Key="str_PartDescription">Part Description:</sys:String>
+    <sys:String x:Key="str_ContainerSN">Container SN:</sys:String>
+    <sys:String x:Key="str_CustomerPN">Customer PN:</sys:String>
+    <sys:String x:Key="str_QuantitytoPack">Quantity to Pack:</sys:String>
+    <sys:String x:Key="str_QuantityPacked">Quantity Packed:</sys:String>
+    <sys:String x:Key="str_WorkInstruction1">1.Scan PN on container label</sys:String>
+    <sys:String x:Key="str_WorkInstruction2">2.Scan SN on container label</sys:String>
+    <sys:String x:Key="str_WorkInstruction3">3.Scan Qty on container label</sys:String>
+    <sys:String x:Key="str_WorkInstruction4">4.Scan part labels unit pack qty is met</sys:String>
+    <sys:String x:Key="str_WorkInstruction5">5.Rescan SN on container label</sys:String>
+    <sys:String x:Key="str_NoMessage">No Message</sys:String>
+    <sys:String x:Key="str_NoContainer">No Container</sys:String>
+    
+    <!--AJ DMES Models 界面标签文本-->
+    <sys:String x:Key="str_ModelID">Model ID:</sys:String>
+    <sys:String x:Key="str_Description">Description:</sys:String>
+    <sys:String x:Key="str_SerializedModel">Serialized Model:</sys:String>
+    <sys:String x:Key="str_TracedModel">Traced Model:</sys:String>
+    <sys:String x:Key="str_Mask">Mask:</sys:String>
+    <sys:String x:Key="str_SerializationID">Serialization ID:</sys:String>
+    <sys:String x:Key="str_StorageLocation">Storage Location:</sys:String>
+    <sys:String x:Key="str_StartDate">Start Date:</sys:String>
+    <sys:String x:Key="str_StopDate">Stop Date:</sys:String>
+    <sys:String x:Key="str_Creator">Creator:</sys:String>
+    
+    <!--AJ DMES Customer 界面标签文本-->
+    <sys:String x:Key="str_CustomerCode">Cusomer Code:</sys:String>
+    <sys:String x:Key="str_CustomerName">Customer Name:</sys:String>
+    <sys:String x:Key="str_National">National:</sys:String>
+    <sys:String x:Key="str_ShortName">Short Name:</sys:String>
+    <sys:String x:Key="str_Address">Address:</sys:String>
+    <sys:String x:Key="str_Phone">Phone:</sys:String>
+    <sys:String x:Key="str_WebSite">Web Site:</sys:String>
+    
+    <!--AJ DMES Traceability 界面标签文本-->
+    <sys:String x:Key="str_Line">Line:</sys:String>
+    <sys:String x:Key="str_Customer">Customer:</sys:String>
+</ResourceDictionary>
