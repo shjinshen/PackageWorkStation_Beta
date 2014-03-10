@@ -39,7 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContainerManager.cs" />
     <Compile Include="CustomerManager.cs" />
+    <Compile Include="IContainerManager.cs" />
     <Compile Include="ICustomerManager.cs" />
     <Compile Include="IModelManager.cs" />
     <Compile Include="ModelManager.cs" />

@@ -34,14 +34,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DLL\Drivers\MySql.Data_5.2.3.0\MySql.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Spring.Core">
-      <HintPath>..\DLL\Spring.net\net\4.0\release\Spring.Core.dll</HintPath>
+    <Reference Include="Spring.Core, Version=2.0.0.40000, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Spring\Spring.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Spring.Data">
-      <HintPath>..\DLL\Spring.net\net\4.0\release\Spring.Data.dll</HintPath>
+    <Reference Include="Spring.Data, Version=2.0.0.40000, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Spring\Spring.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Spring.Data.NHibernate32">
-      <HintPath>..\DLL\Spring.net\net\4.0\release\Spring.Data.NHibernate32.dll</HintPath>
+    <Reference Include="Spring.Data.NHibernate32, Version=2.0.0.40000, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Spring\Spring.Data.NHibernate32.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

@@ -21,11 +21,10 @@ namespace AJ.DMES.PackageWorkstation.Domain
     /// </summary>
     public class Container : Entity
     {
-        public string ContainerPN { get; set; }//外箱箱号
-        public string ContainerSN { get; set; }//外箱序列号
-        public string CustomerId { get; set; }//关联的客户ID号
-        public string ModelId { get; set; }//箱内的产品ID号
-        public int? ContainerSize { get; set; }//包装箱的容量
-        public DateTime? PackedDate { get; set; }//包装日期
+        public virtual string ContainerPN { get; set; }//外箱箱号
+        public virtual string ContainerSN { get; set; }//外箱序列号
+        public virtual Customer Customer { get; set; }//关联的客户
+        public virtual int? ContainerSize { get; set; }//包装箱的容量
+        public virtual DateTime? PackedDate { get; set; }//包装日期
     }
 }

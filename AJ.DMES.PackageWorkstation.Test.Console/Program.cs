@@ -36,19 +36,32 @@ namespace AJ.DMES.PackageWorkstation.Test.Console
                 //modelManager.Save(model);
 
                 ICustomerManager customerManager = (ICustomerManager)SpringContext.GetObject("CustomerManager");
-                Customer customer = new Customer()
+                //Customer customer = new Customer()
+                //{
+                //    CustomerCode = "40000007",
+                //    CustomerName = "Test Customer",
+                //    ShortName = "BMW",
+                //    Address = "Test Address"
+                //};
+
+                //Guid customerId = (Guid)customerManager.Save(customer);
+
+                //Customer cus1 = customerManager.Get(customerId);
+                //cus1.ShortName = "ABC";
+                //customerManager.SaveOrUpdate(cus1);
+
+                Customer customer = customerManager.Get(Guid.Parse("59D1DDB8-A9C3-481B-BA60-A2EA00B2432E"));
+
+                IContainerManager containerManager = (IContainerManager)SpringContext.GetObject("ContainerManager");
+                Container container = new Container()
                 {
-                    CustomerCode = "40000006",
-                    CustomerName = "Test Customer",
-                    ShortName = "BMW",
-                    Address = "Test Address"
+                    ContainerPN = "11111111",
+                    ContainerSN = "22222222",
+                    Customer = customer,
+                    PackedDate = DateTime.Now,
+                    ContainerSize = 10
                 };
-
-                Guid customerId = (Guid)customerManager.Save(customer);
-
-                Customer cus1 = customerManager.Get(customerId);
-                cus1.ShortName = "ABC";
-                customerManager.SaveOrUpdate(cus1);
+                containerManager.Save(container);
             }
             catch (Exception ex)
             { 

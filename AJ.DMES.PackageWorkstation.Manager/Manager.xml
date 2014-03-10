@@ -48,4 +48,13 @@
       </object>
     </property>
   </object>
+
+  <object id="ContainerManager" parent="BaseTransactionManager">
+    <property name="Target">
+      <object type="AJ.DMES.PackageWorkstation.Manager.ContainerManager,AJ.DMES.PackageWorkstation.Manager">
+        <property name="ContainerRepository" ref="repository.container"/>
+      </object>
+    </property>
+  </object>
+  
 </objects>

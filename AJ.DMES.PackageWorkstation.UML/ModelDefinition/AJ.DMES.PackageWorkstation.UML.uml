@@ -467,6 +467,60 @@
               LastKnownLocation="AJ.DMES.PackageWorkstation.UML.uml" />
           </generalization>
         </generalsInternal>
+        <targetEnds>
+          <association
+            Id="a72c1b4c-1a50-42a6-8a12-a785a1c329a0"
+            isDerived="false"
+            sourceEndRoleName="Container"
+            targetEndRoleName="Customer"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="cdac1af5-1c08-4e9f-9b85-c8443793c6b5"
+              LastKnownName="Customer"
+              LastKnownLocation="AJ.DMES.PackageWorkstation.UML.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="7d05ffd4-7e9c-4d1e-a57a-96fadf47f960"
+                  name="Container"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Shared"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="935f3b69-3ac9-4feb-8e38-5cf10a1f107f"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="d4773c30-7a9f-4b58-918e-b9e4a2ce696a"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="d39f5aa9-10c2-4b07-a2e9-e793f1d03f8b"
+                  name="Customer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
         <ownedAttributesInternal>
           <property
             Id="acfd1b32-cb45-4574-b8e2-977304292081"
@@ -489,24 +543,6 @@
           <property
             Id="01b79d93-e6bf-4d23-8b4b-f6802c8f53a9"
             name="ContainerSN"
-            isLeaf="false"
-            isStatic="false"
-            isReadOnly="false"
-            isUnique="false"
-            isDerived="false"
-            isDerivedUnion="false"
-            aggregation="None"
-            isComposite="false">
-            <type_NamedElement>
-              <undefinedTypeMoniker
-                Id="06ebc0ea-2a4b-4edf-8d36-d92f80e821bc"
-                LastKnownName="string"
-                LastKnownLocation="AJ.DMES.PackageWorkstation.UML.uml" />
-            </type_NamedElement>
-          </property>
-          <property
-            Id="e770a828-9dbe-4d2a-96c1-2f9d13061211"
-            name="CustomerId"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -559,8 +595,65 @@
             </type_NamedElement>
           </property>
           <property
-            Id="9e739a8e-163a-4f9e-87de-c1b266c1ee78"
-            name="ModelId"
+            Id="58fe71a7-96da-4638-ba63-99adb7d334c7"
+            name="Customer"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <classMoniker
+                Id="cdac1af5-1c08-4e9f-9b85-c8443793c6b5"
+                LastKnownName="Customer"
+                LastKnownLocation="AJ.DMES.PackageWorkstation.UML.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="5c42bfa4-6a9c-4f6a-a7a5-df1a1a2e4766"
+        name="Container_Model"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="b99c49bb-aff8-447c-9c92-6a4d4549644f"
+            isSubstitutable="false">
+            <classMoniker
+              Id="c35375f7-b206-4400-ba0a-b5ca33f3da41"
+              LastKnownName="Entity"
+              LastKnownLocation="AJ.DMES.PackageWorkstation.UML.uml" />
+          </generalization>
+        </generalsInternal>
+        <ownedAttributesInternal>
+          <property
+            Id="9b6303b3-a563-42aa-b894-abd2dbecfc0a"
+            name="ContainerId"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="06ebc0ea-2a4b-4edf-8d36-d92f80e821bc"
+                LastKnownName="string"
+                LastKnownLocation="AJ.DMES.PackageWorkstation.UML.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="5d9e4941-237f-4d38-a97f-99085183fe9a"
+            name="ModelInstanceId"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -578,6 +671,14 @@
           </property>
         </ownedAttributesInternal>
       </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="3242549d-310a-46dc-bb12-f246e8ff70b8"
+        name="ModelInstance"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType
