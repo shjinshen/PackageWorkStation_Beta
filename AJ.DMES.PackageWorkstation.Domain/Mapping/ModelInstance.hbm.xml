@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="AJ.DMES.PackageWorkstation.Domain"
+                   namespace="AJ.DMES.PackageWorkstation.Domain">
+  <class name="ModelInstance" table="T_ModelInstance">
+
+    <id name="Id" column="Id" length="32">
+      <generator class="guid.comb" />
+    </id>
+    <!--Base properties-->
+    <version name="Version" column="Ver"/>
+    <property name="CreatedDateTime"/>
+    <property name="ModifiedDateTime"/>
+    <!--Individul properties-->
+    <property name="ProductCode" unique="true" length="30"/>
+    <property name="Source" length="100"/>
+    <many-to-one name="Container" column="ContainerId"
+                 class="AJ.DMES.PackageWorkstation.Domain.Container"/>
+    <many-to-one name="Model" column="ModelId"
+                 class="AJ.DMES.PackageWorkstation.Domain.Model"/>
+  </class>
+</hibernate-mapping>

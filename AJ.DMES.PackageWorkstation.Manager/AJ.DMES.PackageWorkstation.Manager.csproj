@@ -43,7 +43,9 @@
     <Compile Include="CustomerManager.cs" />
     <Compile Include="IContainerManager.cs" />
     <Compile Include="ICustomerManager.cs" />
+    <Compile Include="IModelInstanceManager.cs" />
     <Compile Include="IModelManager.cs" />
+    <Compile Include="ModelInstanceManager.cs" />
     <Compile Include="ModelManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

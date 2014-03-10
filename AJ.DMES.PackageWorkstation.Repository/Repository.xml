@@ -62,5 +62,10 @@
           type="AJ.DMES.PackageWorkstation.Repository.NHibernateRepository&lt;AJ.DMES.PackageWorkstation.Domain.Container>,AJ.DMES.PackageWorkstation.Repository">
     <property name="HibernateTemplate" ref="HibernateTemplate"/>
   </object>
-  
+
+  <object id="repository.modelinstance"
+          type="AJ.DMES.PackageWorkstation.Repository.NHibernateRepository&lt;AJ.DMES.PackageWorkstation.Domain.ModelInstance>,AJ.DMES.PackageWorkstation.Repository">
+    <property name="HibernateTemplate" ref="HibernateTemplate"/>
+  </object>
+
 </objects>

@@ -56,5 +56,13 @@
       </object>
     </property>
   </object>
+
+  <object id="ModelInstanceManager" parent="BaseTransactionManager">
+    <property name="Target">
+      <object type="AJ.DMES.PackageWorkstation.Manager.ModelInstanceManager,AJ.DMES.PackageWorkstation.Manager">
+        <property name="ModelInstanceRepository" ref="repository.modelinstance"/>
+      </object>
+    </property>
+  </object>
   
 </objects>
