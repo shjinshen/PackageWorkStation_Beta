@@ -64,5 +64,12 @@
       </object>
     </property>
   </object>
-  
+
+  <object id="UsersManager" parent="BaseTransactionManager">
+    <property name="Target">
+      <object type="AJ.DMES.PackageWorkstation.Manager.UsersManager,AJ.DMES.PackageWorkstation.Manager">
+        <property name="UsersRepository" ref="repository.users"/>
+      </object>
+    </property>
+  </object>
 </objects>

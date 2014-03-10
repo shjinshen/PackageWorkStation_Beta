@@ -68,4 +68,8 @@
     <property name="HibernateTemplate" ref="HibernateTemplate"/>
   </object>
 
+  <object id="repository.users"
+          type="AJ.DMES.PackageWorkstation.Repository.NHibernateRepository&lt;AJ.DMES.PackageWorkstation.Domain.Users>,AJ.DMES.PackageWorkstation.Repository">
+    <property name="HibernateTemplate" ref="HibernateTemplate"/>
+  </object>
 </objects>

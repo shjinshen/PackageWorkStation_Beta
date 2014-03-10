@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="AJ.DMES.PackageWorkstation.Domain"
+                   namespace="AJ.DMES.PackageWorkstation.Domain">
+  <class name="Users" table="T_Users">
+
+    <id name="Id" column="Id" length="32">
+      <generator class="guid.comb" />
+    </id>
+    <!--Entity-->
+    <version name="Version" column="Ver"/>
+    <property name="CreatedDateTime"/>
+    <property name="ModifiedDateTime"/>
+    <!--Own-->
+    <property name="UserName" unique="true" length="20"/>
+    <property name="Password" length="50"/>
+    <property name="RealName" length="10"/>
+    <property name="Gender" length="2"/>
+    <property name="Age" length="2"/>
+    <property name="Phone" length="11"/>
+    <property name="Remark" length="50"/>
+  </class>
+</hibernate-mapping>
