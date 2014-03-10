@@ -1,0 +1,145 @@
+﻿<UserControl xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"  
+        x:Class="AJ.DMES.PackageWorkstation.UI.Wpf.View.CustomerView"
+        xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"  
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:ViewModel="clr-namespace:AJ.DMES.PackageWorkstation.UI.Wpf.ViewModel"
+        xmlns:View="clr-namespace:AJ.DMES.PackageWorkstation.UI.Wpf.View"
+        xmlns:Helpers="clr-namespace:AJ.DMES.PackageWorkstation.UI.Wpf.Helpers"
+        xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+        xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+        xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
+        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+        xmlns:Controls="clr-namespace:AJ.DMES.PackageWorkstation.UI.Wpf.Controls"
+        xmlns:local="clr-namespace:AJ.DMES.PackageWorkstation.UI.Wpf"
+        mc:Ignorable="d"
+        d:DesignHeight="614.239" d:DesignWidth="1326.896">
+    <dxwui:PageAdornerControl Header="Customer">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <View:NavigatorView dxmvvm:ViewModelExtensions.ParentViewModel="{Binding}" />
+            <dxb:BarManager Grid.Row="1" Margin="5,5,5,5">
+                <dxb:BarManager.Items>
+                    <!--Regular bar items-->
+                    <dxb:BarCheckItem Content="Bold" x:Name="checkBtnBold"/>
+                    <dxb:BarButtonItem Content="Add Model" x:Name="btnAdd" 
+                                       Glyph="../images/Add161.png" 
+                                       BarItemDisplayMode="ContentAndGlyph"  />
+                    <dxb:BarButtonItem Content="Edit Model" x:Name="btnEdit" Glyph="../images/edit.png" 
+                                       BarItemDisplayMode="ContentAndGlyph"/>
+                    <dxb:BarButtonItem Content="Delete Model" x:Name="btnDelete" Glyph="../images/Delete16.png" 
+                                       BarItemDisplayMode="ContentAndGlyph"/>
+                    <dxb:BarButtonItem Content="Exit" x:Name="btnExit"/>
+                    <!--Menus-->
+                    <dxb:BarSubItem Content="File" x:Name="menuFile">
+                        <dxb:BarSubItem.ItemLinks>
+                            <dxb:BarButtonItemLink BarItemName="btnExit"/>
+                        </dxb:BarSubItem.ItemLinks>
+                    </dxb:BarSubItem>
+                    <dxb:BarSubItem Content="Format" x:Name="menuFormat">
+                        <dxb:BarSubItem.ItemLinks>
+                            <dxb:BarCheckItemLink BarItemName="checkBtnBold"/>
+                        </dxb:BarSubItem.ItemLinks>
+                    </dxb:BarSubItem>
+                </dxb:BarManager.Items>
+                <!--Create two bars-->
+                <dxb:BarManager.Bars>
+                    <dxb:Bar Caption="Main" IsMainMenu="True" UseWholeRow="True">
+                        <dxb:Bar.DockInfo>
+                            <dxb:BarDockInfo ContainerType="Top"/>
+                        </dxb:Bar.DockInfo>
+                        <dxb:Bar.ItemLinks>
+                            <dxb:BarButtonItemLink BarItemName="btnAdd"/>
+                            <dxb:BarButtonItemLink BarItemName="btnEdit"/>
+                            <dxb:BarButtonItemLink BarItemName="btnDelete"/>
+                        </dxb:Bar.ItemLinks>
+                    </dxb:Bar>
+                </dxb:BarManager.Bars>
+            </dxb:BarManager>
+            <Grid Grid.Row="2" Margin="5,5,5,5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <GroupBox Header="Customer List" Grid.Row="0">
+                        <Grid>
+                            <dxg:GridControl Name="gridControl" 
+                                             ItemsSource="{Binding Path=Data}" 
+                                             AutoGenerateColumns="AddNew" Grid.Row="1">
+                                <dxg:GridControl.Columns>
+                                    <dxg:GridColumn FieldName="CustomerCode"/>
+                                    <dxg:GridColumn FieldName="CustomerName"/>
+                                    <dxg:GridColumn FieldName="National"/>
+                                    <dxg:GridColumn FieldName="ShortName"/>
+                                    <dxg:GridColumn FieldName="Address"/>
+                                    <dxg:GridColumn FieldName="Phone"/>
+                                    <dxg:GridColumn FieldName="WebSite"/>
+                                </dxg:GridControl.Columns>
+                                <dxg:GridControl.View>
+                                    <dxg:TableView 
+                                        Name="view"
+                                        AllowPerPixelScrolling="True"
+                                        ShowGroupedColumns="True"
+                                        NavigationStyle="Row"
+                                        AutoWidth="True"
+                                        />
+                                </dxg:GridControl.View>
+                            </dxg:GridControl>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Customer Detail" Grid.Row="1" Margin="5,0,0,0">
+                        <Grid Margin="0,10,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="1.5*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="1.5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="Customer Code:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Margin="5,5,5,5"/>
+                            <dxe:TextEdit Grid.Row="0" Grid.Column="1"  Margin="10,5,10,5" />
+
+                            <Label Content="Customer Name:" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Margin="5,5,5,5"/>
+                            <dxe:TextEdit Grid.Row="0" Grid.Column="3" Margin="10,5,10,5" />
+
+                            <Label Content="National:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Margin="5,5,5,5"/>
+                            <dxe:TextEdit Grid.Row="1" Grid.Column="1" Margin="10,5,10,5" />
+
+                            <Label Content="Short Name:" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Margin="5,5,5,5"/>
+                            <dxe:TextEdit Grid.Row="1" Grid.Column="3" Margin="10,5,10,5" />
+
+                            <Label Content="Address:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Margin="5,5,5,5"/>
+                            <dxe:TextEdit Grid.Row="2" Grid.Column="1" Margin="10,5,10,5" />
+
+                            <Label Content="Phone:" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Margin="5,5,5,5"/>
+                            <dxe:TextEdit Grid.Row="2" Grid.Column="3" Margin="10,5,10,5" />
+
+                            <Label Content="Web Site:" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" Margin="5,5,5,5"/>
+                            <dxe:TextEdit Grid.Row="3" Grid.Column="1" Margin="10,5,10,5" />
+
+                            <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="1">
+                                <Button Content="Save" HorizontalAlignment="Right" Margin="10,10,5,5" Width="100"/>
+                                <Button Content="Cancel" HorizontalAlignment="Right" Margin="10,10,5,5" />
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+
+            </Grid>
+        </Grid>
+    </dxwui:PageAdornerControl>
+</UserControl>
