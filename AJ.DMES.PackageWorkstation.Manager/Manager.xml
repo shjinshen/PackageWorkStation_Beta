@@ -40,4 +40,12 @@
       </object>
     </property>
   </object>
+
+  <object id="CustomerManager" parent="BaseTransactionManager">
+    <property name="Target">
+      <object type="AJ.DMES.PackageWorkstation.Manager.CustomerManager,AJ.DMES.PackageWorkstation.Manager">
+        <property name="CustomerRepository" ref="repository.customer"/>
+      </object>
+    </property>
+  </object>
 </objects>
