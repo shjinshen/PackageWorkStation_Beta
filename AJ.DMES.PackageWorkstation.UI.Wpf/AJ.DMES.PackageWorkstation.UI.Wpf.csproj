@@ -163,6 +163,7 @@
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ModelViewModel.cs" />
+    <Compile Include="ViewModel\TraceabilityViewModel.cs" />
     <Compile Include="View\CustomerView.xaml.cs">
       <DependentUpon>CustomerView.xaml</DependentUpon>
     </Compile>
@@ -180,6 +181,9 @@
     </Compile>
     <Compile Include="View\PackageOperationView.xaml.cs">
       <DependentUpon>PackageOperationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TraceabilityView.xaml.cs">
+      <DependentUpon>TraceabilityView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WaitScreen.xaml.cs">
       <DependentUpon>WaitScreen.xaml</DependentUpon>
@@ -278,6 +282,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\PackageOperationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TraceabilityView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
