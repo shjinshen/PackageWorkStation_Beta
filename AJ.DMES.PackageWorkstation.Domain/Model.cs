@@ -19,9 +19,13 @@ namespace AJ.DMES.PackageWorkstation.Domain
 {
     public class Model : Entity
     {
-        public virtual string ModelName { get; set; }
+        public virtual string ModelName { get; set; } //厂内产品物料号
 
-        public virtual string Description { get; set; }
+        public virtual string Description { get; set; }//物料描述
+
+        public virtual string CPN { get; set; }//客户提供的物料号
+
+        public virtual Customer Customer { get; set; }//产品对应的客户
 
         public virtual string Reservation_1 { get; set; }
 
