@@ -1,5 +1,4 @@
-﻿<UserControl xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"  
-        x:Class="AJ.DMES.PackageWorkstation.UI.Wpf.View.ModelView"
+﻿<UserControl xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"      
         xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"  
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -15,6 +14,7 @@
         xmlns:System="clr-namespace:System;assembly=mscorlib"
         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
         xmlns:Controls="clr-namespace:AJ.DMES.PackageWorkstation.UI.Wpf.Controls"
+        x:Class="AJ.DMES.PackageWorkstation.UI.Wpf.View.ModelView"
         mc:Ignorable="d"
         d:DesignHeight="614.239" d:DesignWidth="1326.896">
     <UserControl.DataContext>

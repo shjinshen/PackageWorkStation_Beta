@@ -1,5 +1,4 @@
-﻿<UserControl xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"  
-        x:Class="AJ.DMES.PackageWorkstation.UI.Wpf.View.CustomerView"
+﻿<UserControl xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"    
         xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"  
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -16,6 +15,7 @@
         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
         xmlns:Controls="clr-namespace:AJ.DMES.PackageWorkstation.UI.Wpf.Controls"
         xmlns:local="clr-namespace:AJ.DMES.PackageWorkstation.UI.Wpf"
+        x:Class="AJ.DMES.PackageWorkstation.UI.Wpf.View.CustomerView"
         mc:Ignorable="d"
         d:DesignHeight="614.239" d:DesignWidth="1326.896">
     <dxwui:PageAdornerControl Header="Customer">
