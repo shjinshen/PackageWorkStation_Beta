@@ -25,14 +25,28 @@ namespace AJ.DMES.PackageWorkstation.UI.Wpf.View
 
         private Model currentModel;
 
+        private Container currentContainer;//当前工作的包装箱
+
+        private int currentQty = 0;//当前包装的数量
+
+        private IList<ModelInstance> modelInstanceList;
+
         private IModelManager modelManager;
 
-        private Container currentContainer;//当前工作的包装箱
+        private IContainerManager containerManager;
 
         public PackageOperationView()
         {
             InitializeComponent();
-            modelManager = (IModelManager)SpringContext.GetObject("ModelManager");
+            try
+            {
+                modelManager = (IModelManager)SpringContext.GetObject("ModelManager");
+                containerManager = (IContainerManager)SpringContext.GetObject("ContainerManager");
+            }
+            catch (Exception ex)
+            { 
+            
+            }
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -105,20 +119,38 @@ namespace AJ.DMES.PackageWorkstation.UI.Wpf.View
                 case 1:
                     ScanDPN(txtScanBox.Text);
                     break;
+                case 2:
+                    ScanSN(txtScanBox.Text);
+                    break;
+                case 3:
+                    ScanQty(txtScanBox.Text);
+                    break;
+                case 4:
+                    ScanCPN(txtScanBox.Text);
+                    break;
             }
+
+            //清空扫描栏
+            txtScanBox.Text = "";
+            txtScanBox.Focus();
+
+            SetStepLabel();
         }
 
         /// <summary>
         /// 创建包装箱
         /// </summary>
-        private void CreateContainer()
+        private void CreateContainer(string sn)
         {
             currentContainer = new Container();
             currentContainer.CreatedDateTime = DateTime.Now;
+            currentContainer.ContainerPN = currentModel.ModelName;
+            currentContainer.ContainerSN = sn;
+            currentContainer.CustomerPN = currentModel.CPN;
         }
 
         /// <summary>
-        /// 扫描DPN的操作
+        ///Step1. 扫描DPN的操作
         /// </summary>
         private bool ScanDPN(string barcode)
         {
@@ -131,31 +163,89 @@ namespace AJ.DMES.PackageWorkstation.UI.Wpf.View
 
             if (string.IsNullOrEmpty(dpn)) return false;//如果字符串为空，则返回false
             //3.通过dpn号，获得当前的model对象
+            currentModel = modelManager.Get(dpn);
+            //4.填充界面
             UpdateModelInfo();
-            //4.切换步骤号
+            //5.切换步骤号
             stepNo = 2;
+      
             return true;
         }
 
         /// <summary>
-        /// 扫描序列号
+        /// Step2.扫描序列号
         /// </summary>
         /// <returns></returns>
         private bool ScanSN(string barcode)
         {
             string prefix = "3s";//序列号的前缀，后面需要从配置信息中读取
             //1.获得序列号
-            string sn = FilterPrefix(barcode,prefix);
-            //2.判断需要号是否存在
+            string sn = FilterPrefix(barcode, prefix);
+            //2.根据sn获得包装箱
+            currentContainer = containerManager.Get(sn);
+            if (currentContainer == null) CreateContainer(sn);//如果没有新建一个包装箱
+            else
+            {
+                //有的话判断是否已经封箱
+                if (currentContainer.ContainerStatus == (int)EContainerStatus.Closed)
+                {
+                    //警告用户包装箱已经封箱
 
+                }
+                else
+                {
+                    //表示前面包装箱没有完成，继续工作
 
-            //3.填充序列号界面
-            lblCustomerSN.Content = sn;
+                }
+            }
+            //3.填充界面包装箱部分
+            UpdateContainerInfo();
 
-
+            //4.递进步骤号
+            stepNo = 3;
 
             return true;
         }
+
+        /// <summary>
+        /// Step3.扫描qty条码操作
+        /// </summary>
+        /// <param name="barcode"></param>
+        private void ScanQty(string barcode)
+        {
+            string prefix = "q";//数量条码的前缀，后面需要从配置信息中读取
+            int qty = int.Parse(FilterPrefix(barcode, prefix));
+            lblContainerQty.Content = qty;
+            currentContainer.ContainerSize = qty;
+            currentQty = 0;
+            UpdateQtyInfo();
+            stepNo = 4;
+        }
+
+        /// <summary>
+        /// Step4.扫描产品2D条码
+        /// </summary>
+        /// <param name="barcode"></param>
+        private void ScanCPN(string barcode)
+        { 
+            //1.切分2维条码，将其填入ModelInstance实体中
+            ModelInstance mInstance = new ModelInstance();
+            mInstance.Model = currentModel;
+            mInstance.Container = currentContainer;
+            mInstance.ProductCode = barcode;
+            //2.填充到集合中
+            if (modelInstanceList == null) modelInstanceList = new List<ModelInstance>();
+            modelInstanceList.Add(mInstance);
+            currentQty++;
+            UpdateQtyInfo();
+
+            //3.填充包装列表
+            UpdatePackedList();
+
+            //4.判断是否已经满箱
+            if (currentQty == currentContainer.ContainerSize) stepNo = 5;//如果已经满箱，则转到封箱操作
+        }
+        
 
         /// <summary>
         /// 把条码中的前缀去掉
@@ -167,7 +257,7 @@ namespace AJ.DMES.PackageWorkstation.UI.Wpf.View
         {
             int indexOfPrefix = barcode.ToLower().IndexOf(prefix);
             if (indexOfPrefix < 0) return "";
-            return barcode.Substring(indexOfPrefix);
+            return barcode.Substring(prefix.Length);
         }
 
         /// <summary>
@@ -180,6 +270,29 @@ namespace AJ.DMES.PackageWorkstation.UI.Wpf.View
             txtDelphiPN.Text = currentModel.ModelName;
             txtDescription.Text = currentModel.Description;
             txtCPN.Text = currentModel.CPN;
+        }
+
+        /// <summary>
+        /// 填充包装箱信息
+        /// </summary>
+        private void UpdateContainerInfo()
+        {
+            if (currentContainer == null) return;
+            
+            lblContianerSN.Content = currentContainer.ContainerSN;
+            lblCustomerPN.Content = currentContainer.CustomerPN;
+        }
+
+        private void UpdateQtyInfo()
+        {
+            lblPackedQty.Content = currentQty;
+        }
+
+        private void UpdatePackedList()
+        {
+            lsPackedProduct.ItemsSource = null;
+            lsPackedProduct.ItemsSource = modelInstanceList;
+            lsPackedProduct.DisplayMember = "ProductCode";
         }
     }
 }

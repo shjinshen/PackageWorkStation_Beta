@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AJ.DMES.PackageWorkstation.Domain;
+using AJ.DMES.PackageWorkstation.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,6 +9,8 @@ namespace AJ.DMES.PackageWorkstation.Manager
 {
     public class UsersManager:IUsersManager
     {
+        public IRepository<Users> UsersRepository { get; set; }
+
         public object Save(Domain.Users entity)
         {
             throw new NotImplementedException();

@@ -23,6 +23,7 @@ namespace AJ.DMES.PackageWorkstation.Manager
         void SaveOrUpdate(Model entity);
         void Update(Model entity);
         Model Get(object id);
+        Model Get(string modelName);
         void Delete(Model entity);
         IList<Model> Find(string hql);
     }

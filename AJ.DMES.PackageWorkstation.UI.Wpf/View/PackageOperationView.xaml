@@ -98,7 +98,7 @@
                                     <ColumnDefinition Width="1.5*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Content="Container SN:" Margin="5,5,5,5" Grid.Row="0" Grid.Column="0"/>
-                                <Label Content="-" Width="200" Margin="5,5,5,5" Grid.Row="0" Grid.Column="1"  Name="lblCustomerSN"/>
+                                <Label Content="-" Width="200" Margin="5,5,5,5" Grid.Row="0" Grid.Column="1"  Name="lblContianerSN"/>
                                 <Label Content="Customer PN:" Margin="5,5,5,5" Grid.Row="1" Grid.Column="0" />
                                 <Label Content="-" Width="200" Margin="5,5,5,5" Grid.Row="1" Grid.Column="1" Name="lblCustomerPN"/>
                                 <Label Content="Quantity to Pack:" Margin="5,5,5,5" Grid.Row="2" Grid.Column="0"/>

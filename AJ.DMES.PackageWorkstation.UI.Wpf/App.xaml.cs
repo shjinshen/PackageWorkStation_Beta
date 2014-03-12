@@ -1,4 +1,5 @@
-﻿using DevExpress.Xpf.Core;
+﻿using AJ.DMES.PackageWorkstation.UI.Wpf.Helpers;
+using DevExpress.Xpf.Core;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -29,6 +30,8 @@ namespace AJ.DMES.PackageWorkstation.UI.Wpf
             baseStart();
             Timeline.DesiredFrameRateProperty.OverrideMetadata(typeof(Timeline), new FrameworkPropertyMetadata(200));
             SetCultureInfo();
+            //初始化Spring
+            SpringContext.Init();
         }
         #region LoadPlugins
         static void LoadPlugins()

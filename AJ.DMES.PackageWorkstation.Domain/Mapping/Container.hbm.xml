@@ -16,6 +16,8 @@
     <property name="ContainerSN" length="50"/>
     <property name="ContainerSize"/>
     <property name="PackedDate"/>
+    <property name="ContainerStatus"/>
+    <property name="CustomerPN" length="50"/>
     <many-to-one name="Customer" column="CustomerId"
                  class="AJ.DMES.PackageWorkstation.Domain.Customer"/>
   </class>
