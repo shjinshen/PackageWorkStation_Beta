@@ -1,4 +1,6 @@
 ﻿using AJ.DMES.PackageWorkstation.Domain;
+using AJ.DMES.PackageWorkstation.Manager;
+using AJ.DMES.PackageWorkstation.UI.Wpf.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,9 +25,14 @@ namespace AJ.DMES.PackageWorkstation.UI.Wpf.View
 
         private Model currentModel;
 
+        private IModelManager modelManager;
+
+        private Container currentContainer;//当前工作的包装箱
+
         public PackageOperationView()
         {
             InitializeComponent();
+            modelManager = (IModelManager)SpringContext.GetObject("ModelManager");
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -93,7 +100,21 @@ namespace AJ.DMES.PackageWorkstation.UI.Wpf.View
         {
             //不是回车键，则不做任何处理
             if (e.Key != Key.Enter) return;
+            switch (stepNo)
+            { 
+                case 1:
+                    ScanDPN(txtScanBox.Text);
+                    break;
+            }
+        }
 
+        /// <summary>
+        /// 创建包装箱
+        /// </summary>
+        private void CreateContainer()
+        {
+            currentContainer = new Container();
+            currentContainer.CreatedDateTime = DateTime.Now;
         }
 
         /// <summary>
@@ -105,18 +126,53 @@ namespace AJ.DMES.PackageWorkstation.UI.Wpf.View
             string prefix = "1p";
 
             //1.判断条码是否是合法的dpn条码
-            int indexOfPrefix = barcode.ToLower().IndexOf(prefix);
-            if (indexOfPrefix < 0) return false;//如果没有查询到，表示该条码不是合法的dpn号
             //2.解析条码，获得dpn号
-            string dpn = barcode.Substring(indexOfPrefix);
+            string dpn = FilterPrefix(barcode, prefix);
+
             if (string.IsNullOrEmpty(dpn)) return false;//如果字符串为空，则返回false
             //3.通过dpn号，获得当前的model对象
-            
+            UpdateModelInfo();
+            //4.切换步骤号
+            stepNo = 2;
+            return true;
+        }
+
+        /// <summary>
+        /// 扫描序列号
+        /// </summary>
+        /// <returns></returns>
+        private bool ScanSN(string barcode)
+        {
+            string prefix = "3s";//序列号的前缀，后面需要从配置信息中读取
+            //1.获得序列号
+            string sn = FilterPrefix(barcode,prefix);
+            //2.判断需要号是否存在
+
+
+            //3.填充序列号界面
+            lblCustomerSN.Content = sn;
+
+
 
             return true;
         }
 
-        //填充Model信息
+        /// <summary>
+        /// 把条码中的前缀去掉
+        /// </summary>
+        /// <param name="barcode"></param>
+        /// <param name="prefix"></param>
+        /// <returns></returns>
+        private string FilterPrefix(string barcode,string prefix)
+        {
+            int indexOfPrefix = barcode.ToLower().IndexOf(prefix);
+            if (indexOfPrefix < 0) return "";
+            return barcode.Substring(indexOfPrefix);
+        }
+
+        /// <summary>
+        /// 填充Model信息
+        /// </summary>
         private void UpdateModelInfo()
         {
             if (currentModel == null)
