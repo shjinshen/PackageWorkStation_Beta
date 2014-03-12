@@ -35,6 +35,13 @@ namespace AJ.DMES.PackageWorkstation.Repository
             return this.HibernateTemplate.Get<T>(id);
         }
 
+        public T Get(string hql)
+        {
+            IList<T> list = Find(hql);
+            if (list == null || list.Count <= 0) return default(T);
+            else return list[0];
+        }
+
         public void Delete(T entity)
         {
             this.HibernateTemplate.Delete(entity);
