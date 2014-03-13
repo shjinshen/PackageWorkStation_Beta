@@ -30,9 +30,8 @@ namespace AJ.DMES.PackageWorkstation.UI.Wpf
             baseStart();
             Timeline.DesiredFrameRateProperty.OverrideMetadata(typeof(Timeline), new FrameworkPropertyMetadata(200));
             SetCultureInfo();
-            if (!SpringContext.IsInit)
-                SpringContext.Init();
-        }
+			if (!SpringContext.IsInit)
+                SpringContext.Init();        }
         #region LoadPlugins
         static void LoadPlugins()
         {

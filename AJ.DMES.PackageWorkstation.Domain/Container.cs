@@ -16,6 +16,12 @@ using System.Text;
 
 namespace AJ.DMES.PackageWorkstation.Domain
 {
+    public enum EContainerStatus
+    { 
+        Open = 1,
+        Closed = 2
+    }
+
     /// <summary>
     /// 包装箱实体
     /// </summary>
@@ -23,8 +29,10 @@ namespace AJ.DMES.PackageWorkstation.Domain
     {
         public virtual string ContainerPN { get; set; }//外箱箱号
         public virtual string ContainerSN { get; set; }//外箱序列号
+        public virtual string CustomerPN { get; set; }//箱内包装的客户PN
         public virtual Customer Customer { get; set; }//关联的客户
         public virtual int? ContainerSize { get; set; }//包装箱的容量
         public virtual DateTime? PackedDate { get; set; }//包装日期
+        public virtual int? ContainerStatus { get; set; }//包装箱状态
     }
 }

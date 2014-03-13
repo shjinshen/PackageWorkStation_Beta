@@ -51,5 +51,22 @@ namespace AJ.DMES.PackageWorkstation.Manager
         {
             return ContainerRepository.Find(hql);
         }
+
+        /// <summary>
+        /// 获取数据库中是否存在已经封箱的SN号
+        /// </summary>
+        /// <param name="sn"></param>
+        /// <returns></returns>
+        public bool IsSNExist(string sn)
+        {
+            string hql = string.Format("from Container where ContainerSN='{0}' and ContainerStatus=2", sn);
+            return ContainerRepository.Get(hql) != null;
+        }
+
+        public Container Get(string sn)
+        {
+            string hql = string.Format("from Container where ContainerSN='{0}'", sn);
+            return ContainerRepository.Get(hql);
+        }
     }
 }

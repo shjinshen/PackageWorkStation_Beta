@@ -23,7 +23,14 @@ namespace AJ.DMES.PackageWorkstation.Manager
         void SaveOrUpdate(Container entity);
         void Update(Container entity);
         Container Get(object id);
+        /// <summary>
+        /// 根据sn号获取外箱
+        /// </summary>
+        /// <param name="sn"></param>
+        /// <returns></returns>
+        Container Get(string sn);
         void Delete(Container entity);
         IList<Container> Find(string hql);
+        bool IsSNExist(string sn);
     }
 }

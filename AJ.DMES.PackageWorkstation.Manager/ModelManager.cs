@@ -44,6 +44,17 @@ namespace AJ.DMES.PackageWorkstation.Manager
             
        }
 
+        /// <summary>
+        /// 根据Model的名称（DPN）获得Model对象
+        /// </summary>
+        /// <param name="modelName"></param>
+        /// <returns></returns>
+        public Model Get(string modelName)
+        {
+            string hql = string.Format("from Model where ModelName = '{0}'", modelName);
+            return ModelRepository.Get(hql);
+        }
+
         public void Delete(Domain.Model entity)
         {
             ModelRepository.Delete(entity);

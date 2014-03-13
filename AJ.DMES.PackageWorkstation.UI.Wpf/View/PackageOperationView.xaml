@@ -16,7 +16,7 @@
         xmlns:Controls="clr-namespace:AJ.DMES.PackageWorkstation.UI.Wpf.Controls"
         x:Class="AJ.DMES.PackageWorkstation.UI.Wpf.View.PackageOperationView"
         mc:Ignorable="d"
-        d:DesignHeight="614.239" d:DesignWidth="1326.896">
+        d:DesignHeight="614.239" d:DesignWidth="1326.896" Loaded="UserControl_Loaded">
 
     <UserControl.DataContext>
         <ViewModel:HomeViewModel />
@@ -49,9 +49,9 @@
                                 <Label Content="Delphi PN:" Margin="5,5,5,5" Grid.Row="0" Grid.Column="0"/>
                                 <dxe:TextEdit Width="200" Margin="5,5,5,5" Grid.Row="0" Grid.Column="1" IsReadOnly="True" Name="txtDelphiPN"/>
                                 <Label Content="Part Description:" Margin="5,5,5,5" Grid.Row="1" Grid.Column="0"/>
-                                <dxe:TextEdit Width="200" Margin="5,5,5,5" Grid.Row="1" Grid.Column="1" IsReadOnly="True"/>
+                                <dxe:TextEdit x:Name="txtDescription" Width="200" Margin="5,5,5,5" Grid.Row="1" Grid.Column="1" IsReadOnly="True"/>
                                 <Label Content="Customer PN:" Margin="5,5,5,5" Grid.Row="2" Grid.Column="0"/>
-                                <dxe:TextEdit Width="200" Margin="5,5,5,5" Grid.Row="2" Grid.Column="1" IsReadOnly="True"/>
+                                <dxe:TextEdit x:Name="txtCPN" Width="200" Margin="5,5,5,5" Grid.Row="2" Grid.Column="1" IsReadOnly="True"/>
                             </Grid>
                         </GroupBox>
                     </StackPanel>
@@ -64,7 +64,7 @@
                                 <Label Content="3.Scan Qty on container label" Margin="5,5,5,5" Name="lblStep3"/>
                                 <Label Content="4.Scan part labels unit pack qty is met" Margin="5,5,5,5" Name="lblStep4"/>
                                 <Label Content="5.Rescan SN on container label" Margin="5,5,5,5" Name="lblStep5"/>
-                                <dxe:TextEdit  MinHeight="30" MinWidth="250" x:Name="txtScanBox"/>
+                                <dxe:TextEdit  MinHeight="30" MinWidth="250" x:Name="txtScanBox" KeyDown="txtScanBox_KeyDown"/>
                             </StackPanel>
                         </GroupBox>
                     </StackPanel>
@@ -98,7 +98,7 @@
                                     <ColumnDefinition Width="1.5*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Content="Container SN:" Margin="5,5,5,5" Grid.Row="0" Grid.Column="0"/>
-                                <Label Content="-" Width="200" Margin="5,5,5,5" Grid.Row="0" Grid.Column="1"  Name="lblCustomerSN"/>
+                                <Label Content="-" Width="200" Margin="5,5,5,5" Grid.Row="0" Grid.Column="1"  Name="lblContianerSN"/>
                                 <Label Content="Customer PN:" Margin="5,5,5,5" Grid.Row="1" Grid.Column="0" />
                                 <Label Content="-" Width="200" Margin="5,5,5,5" Grid.Row="1" Grid.Column="1" Name="lblCustomerPN"/>
                                 <Label Content="Quantity to Pack:" Margin="5,5,5,5" Grid.Row="2" Grid.Column="0"/>

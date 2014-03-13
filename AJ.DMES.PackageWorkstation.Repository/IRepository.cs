@@ -22,6 +22,7 @@ namespace AJ.DMES.PackageWorkstation.Repository
         void SaveOrUpdate(T entity);
         void Update(T entity);
         T Get(object id);
+        T Get(string hql);
         void Delete(T entity);
         IList<T> Find(string hql);
     }
