@@ -20,6 +20,7 @@
     <UserControl.DataContext>
         <ViewModel:ModelViewModel />
     </UserControl.DataContext>
+
     <dxwui:PageAdornerControl Header="Models">
         <Grid>
             <Grid.RowDefinitions>
@@ -32,9 +33,10 @@
                 <dxb:BarManager.Items>
                     <!--Regular bar items-->
                     <dxb:BarCheckItem Content="Bold" x:Name="checkBtnBold"/>
-                    <dxb:BarButtonItem Content="Add Model" x:Name="btnAdd" Glyph="../images/Add161.png" BarItemDisplayMode="ContentAndGlyph"  />
-                    <dxb:BarButtonItem Content="Edit Model" x:Name="btnEdit" Glyph="../images/edit.png" BarItemDisplayMode="ContentAndGlyph"/>
-                    <dxb:BarButtonItem Content="Delete Model" x:Name="btnDelete" Glyph="../images/Delete16.png" BarItemDisplayMode="ContentAndGlyph"/>
+                    <dxb:BarButtonItem Content="Query Model" x:Name="btnQuery" Glyph="../images/Search.png" BarItemDisplayMode="ContentAndGlyph" ItemClick="btnQuery_ItemClick"  />
+                    <dxb:BarButtonItem Content="Add Model" x:Name="btnAdd" Glyph="../images/Add161.png" BarItemDisplayMode="ContentAndGlyph" ItemClick="btnAdd_ItemClick"  />
+                    <dxb:BarButtonItem Content="Edit Model" x:Name="btnEdit" Glyph="../images/edit.png" BarItemDisplayMode="ContentAndGlyph" ItemClick="btnEdit_ItemClick"/>
+                    <dxb:BarButtonItem Content="Delete Model" x:Name="btnDelete" Glyph="../images/Delete16.png"  BarItemDisplayMode="ContentAndGlyph"  ItemClick="btnDelete_ItemClick"/>
                     <dxb:BarButtonItem Content="Exit" x:Name="btnExit"/>
                     <!--Menus-->
                     <dxb:BarSubItem Content="File" x:Name="menuFile">
@@ -55,6 +57,7 @@
                             <dxb:BarDockInfo ContainerType="Top"/>
                         </dxb:Bar.DockInfo>
                         <dxb:Bar.ItemLinks>
+                           <dxb:BarButtonItemLink BarItemName="btnQuery"/>
                             <dxb:BarButtonItemLink BarItemName="btnAdd"/>
                             <dxb:BarButtonItemLink BarItemName="btnEdit"/>
                             <dxb:BarButtonItemLink BarItemName="btnDelete"/>
@@ -70,21 +73,36 @@
                     </Grid.ColumnDefinitions>
                     <GroupBox Header="Model List" Grid.Column="0">
                         <Grid>
-                            <dxg:GridControl Name="gridControl" 
-                                             ItemsSource="{Binding Path=Data}" 
-                                             AutoGenerateColumns="AddNew" Grid.Row="1">
+                            <dxg:GridControl Name="gridContro_Models" 
+                                            Grid.Row="1" >
+                                <dxg:GridControl.Columns>
+                                    <dxg:GridColumn Header="ModelName" Binding="{Binding Path=ModelName}"/>
+                                    <dxg:GridColumn Header="Description"  Binding="{Binding Path=Description}"/>
+                                    <dxg:GridColumn  Header="CPN"  Binding="{Binding Path=CPN}"/>
+                                  
+                                  <dxg:GridColumn   Binding="{Binding Path=Customerid}" Header="Customer" >
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:ComboBoxEditSettings  x:Name="colCustomerId" ValueMember="Id" DisplayMember="CustomerName"
+                                             />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+
+                                </dxg:GridControl.Columns>
+
                                 <dxg:GridControl.View>
                                     <dxg:TableView 
-                                        IsSynchronizedWithCurrentItem="{Binding Path=IsChecked, 
-                                        ElementName=isSyncCheckBox}" 
-                                        AutoWidth="True" ShowGroupPanel="True" AllowGrouping="True"
-                                        AllowEditing="False" ShowAutoFilterRow="True" />
+                                        Name="view"
+                                        AllowPerPixelScrolling="True"
+                                        ShowGroupedColumns="True"
+                                        NavigationStyle="Row"
+                                        AutoWidth="True"
+                                        />
                                 </dxg:GridControl.View>
                             </dxg:GridControl>
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="Model Detail" Grid.Column="1" Margin="5,0,0,0">
-                        <Grid Margin="0,20,0,0">
+                        <Grid Margin="0,20,0,0" Name="gridModelDetail" DataContext="{Binding ElementName=gridContro_Models, Path=SelectedItem}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="1.6*"/>
@@ -101,12 +119,14 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <Label Content="Model ID:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Margin="5,5,5,5"/>
-                            <dxe:TextEdit Grid.Row="0" Grid.Column="1"  Margin="10,5,10,5" Name="txtModelId"/>
+                            <Label Content="Model Name:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Margin="5,5,5,5"/>
+                            <dxe:TextEdit Grid.Row="0" Grid.Column="1" Text="{Binding Path=ModelName}"  Margin="10,5,10,5" Name="txtModelName"/>
 
-                            <Label Content="Description:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Margin="5,5,5,5"/>
-                            <dxe:TextEdit Grid.Row="1" Grid.Column="1" Margin="10,5,10,5" />
+                            <Label Content="Description:" Grid.Row="1" Grid.Column="0"  HorizontalAlignment="Right" Margin="5,5,5,5"/>
+                            <dxe:TextEdit Grid.Row="1" Grid.Column="1" Name="txtDescription" Margin="10,5,10,5" Text="{Binding Path=Description}" />
 
                             <Label Content="Serialized Model:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Margin="5,5,5,5"/>
                             <dxe:TextEdit Grid.Row="2" Grid.Column="1" Margin="10,5,10,5" />
@@ -132,10 +152,19 @@
                             <Label Content="Creator:" Grid.Row="9" Grid.Column="0" HorizontalAlignment="Right" Margin="5,5,5,5"/>
                             <dxe:TextEdit Grid.Row="9" Grid.Column="1" Margin="10,5,10,5" />
 
-                            <StackPanel Orientation="Horizontal" Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2">
-                                <Button Content="Save" HorizontalAlignment="Left" Margin="10,10,5,5" Width="100"/>
-                                <Button Content="Cancel" HorizontalAlignment="Left" Margin="10,10,5,5" />
+                            <Label Content="CPN:" Grid.Row="10" Grid.Column="0" HorizontalAlignment="Right" Margin="5,5,5,5"/>
+                            <dxe:TextEdit Grid.Row="10" Grid.Column="1" Margin="10,5,10,5" Name="txtCPN" Text="{Binding Path=CPN}" />
+
+                            <Label Content="Customer:" Grid.Row="11" Grid.Column="0" HorizontalAlignment="Right" Margin="5,5,5,5"/>
+                          <dxg:LookUpEdit Name="lookupedit_Customers"   EditValue="{Binding Path=CustomerId}"  Grid.Column="1" Margin="10,5,10,5" Grid.Row="11">
+                          
+                          </dxg:LookUpEdit>
+                            
+                            <StackPanel Orientation="Horizontal" Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="2">
+                                <Button Name="btnSave" Content="Save" HorizontalAlignment="Left" Margin="10,10,5,5" Width="100" Click="btnSave_Click"/>
+                                <Button Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="10,10,5,5" Click="btnCancel_Click" />
                             </StackPanel>
+                            
                         </Grid>
                     </GroupBox>
                 </Grid>

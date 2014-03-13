@@ -8,6 +8,7 @@
                 <ResourceDictionary Source="/PackageWorkstation;component/Themes/CommonResources.xaml" />
                 <ResourceDictionary Source="/PackageWorkstation;component/Themes/CommonStyles.xaml" />
                 <ResourceDictionary Source="/PackageWorkstation;component/Themes/CommonTemplates.xaml" />
+                <ResourceDictionary Source="/PackageWorkstation;component/ViewResources/ControlsTextTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

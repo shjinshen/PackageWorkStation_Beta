@@ -20,6 +20,7 @@ namespace AJ.DMES.PackageWorkstation.Domain
     {
         public virtual string CustomerCode { get; set; }
         public virtual string CustomerName { get; set; }
+        public virtual string Country { get; set; }
         public virtual string ShortName { get; set; }
         public virtual string Address { get; set; }
         public virtual string Phone { get; set; }

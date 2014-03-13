@@ -18,7 +18,7 @@
         x:Class="AJ.DMES.PackageWorkstation.UI.Wpf.View.CustomerView"
         mc:Ignorable="d"
         d:DesignHeight="614.239" d:DesignWidth="1326.896">
-    <dxwui:PageAdornerControl Header="Customer">
+    <dxwui:PageAdornerControl Header="Customer" Loaded="PageAdornerControl_Loaded_1">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -30,13 +30,15 @@
                 <dxb:BarManager.Items>
                     <!--Regular bar items-->
                     <dxb:BarCheckItem Content="Bold" x:Name="checkBtnBold"/>
-                    <dxb:BarButtonItem Content="Add Model" x:Name="btnAdd" 
+                    <dxb:BarButtonItem Content="{StaticResource str_AddModel}" x:Name="btnAdd" 
                                        Glyph="../images/Add161.png" 
-                                       BarItemDisplayMode="ContentAndGlyph"  />
-                    <dxb:BarButtonItem Content="Edit Model" x:Name="btnEdit" Glyph="../images/edit.png" 
-                                       BarItemDisplayMode="ContentAndGlyph"/>
-                    <dxb:BarButtonItem Content="Delete Model" x:Name="btnDelete" Glyph="../images/Delete16.png" 
-                                       BarItemDisplayMode="ContentAndGlyph"/>
+                                       BarItemDisplayMode="ContentAndGlyph" ItemClick="BarButtonItemClick"  />
+                    <dxb:BarButtonItem Content="{StaticResource str_EditModel}" x:Name="btnEdit" Glyph="../images/edit.png" 
+                                       BarItemDisplayMode="ContentAndGlyph" ItemClick="BarButtonItemClick"/>
+                    <dxb:BarButtonItem Content="{StaticResource str_DeleteModel}" x:Name="btnDelete" Glyph="../images/Delete16.png" 
+                                       BarItemDisplayMode="ContentAndGlyph" ItemClick="BarButtonItemClick"/>
+                    <dxb:BarButtonItem Content="{StaticResource str_QueryModel}" x:Name="btnQuery" Glyph="../images/Search.png"
+                                       BarItemDisplayMode="ContentAndGlyph" ItemClick="BarButtonItemClick"/>
                     <dxb:BarButtonItem Content="Exit" x:Name="btnExit"/>
                     <!--Menus-->
                     <dxb:BarSubItem Content="File" x:Name="menuFile">
@@ -60,6 +62,7 @@
                             <dxb:BarButtonItemLink BarItemName="btnAdd"/>
                             <dxb:BarButtonItemLink BarItemName="btnEdit"/>
                             <dxb:BarButtonItemLink BarItemName="btnDelete"/>
+                            <dxb:BarButtonItemLink BarItemName="btnQuery"/>
                         </dxb:Bar.ItemLinks>
                     </dxb:Bar>
                 </dxb:BarManager.Bars>
@@ -73,12 +76,11 @@
                     <GroupBox Header="Customer List" Grid.Row="0">
                         <Grid>
                             <dxg:GridControl Name="gridControl" 
-                                             ItemsSource="{Binding Path=Data}" 
-                                             AutoGenerateColumns="AddNew" Grid.Row="1">
+                                             ItemsSource="{Binding Path=DataGridBinding}" Grid.Row="1" SelectedItemChanged="gridControl_SelectedItemChanged">
                                 <dxg:GridControl.Columns>
                                     <dxg:GridColumn FieldName="CustomerCode"/>
                                     <dxg:GridColumn FieldName="CustomerName"/>
-                                    <dxg:GridColumn FieldName="National"/>
+                                    <dxg:GridColumn FieldName="Country"/>
                                     <dxg:GridColumn FieldName="ShortName"/>
                                     <dxg:GridColumn FieldName="Address"/>
                                     <dxg:GridColumn FieldName="Phone"/>
@@ -97,7 +99,7 @@
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="Customer Detail" Grid.Row="1" Margin="5,0,0,0">
-                        <Grid Margin="0,10,0,0">
+                        <Grid Name="CustomerDetail" Margin="0,10,0,0" DataContext="{Binding ElementName=gridControl,Path=SelectedItem}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="1.5*"/>
@@ -110,30 +112,29 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <Label Content="Customer Code:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Margin="5,5,5,5"/>
-                            <dxe:TextEdit Grid.Row="0" Grid.Column="1"  Margin="10,5,10,5" />
+                            <Label Content="{StaticResource str_CustomerCode}" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Margin="5,5,5,5"/>
+                            <dxe:TextEdit Grid.Row="0" Grid.Column="1"  Margin="10,5,10,5" Text="{Binding Path=CustomerCode}"/>
+                            <Label Content="{StaticResource str_CustomerName}" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Margin="5,5,5,5"/>
+                            <dxe:TextEdit Grid.Row="0" Grid.Column="3" Margin="10,5,10,5" Text="{Binding Path=CustomerName}" />
 
-                            <Label Content="Customer Name:" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Margin="5,5,5,5"/>
-                            <dxe:TextEdit Grid.Row="0" Grid.Column="3" Margin="10,5,10,5" />
+                            <Label Content="{StaticResource str_Country}" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Margin="5,5,5,5"/>
+                            <dxe:TextEdit Grid.Row="1" Grid.Column="1" Margin="10,5,10,5" Text="{Binding Path=Country}"/>
 
-                            <Label Content="National:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Margin="5,5,5,5"/>
-                            <dxe:TextEdit Grid.Row="1" Grid.Column="1" Margin="10,5,10,5" />
+                            <Label Content="{StaticResource str_ShortName}" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Margin="5,5,5,5"/>
+                            <dxe:TextEdit Grid.Row="1" Grid.Column="3" Margin="10,5,10,5" Text="{Binding Path=ShortName}"/>
 
-                            <Label Content="Short Name:" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Margin="5,5,5,5"/>
-                            <dxe:TextEdit Grid.Row="1" Grid.Column="3" Margin="10,5,10,5" />
+                            <Label Content="{StaticResource str_Address}" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Margin="5,5,5,5"/>
+                            <dxe:TextEdit Grid.Row="2" Grid.Column="1" Margin="10,5,10,5" Text="{Binding Path=Address}"/>
 
-                            <Label Content="Address:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Margin="5,5,5,5"/>
-                            <dxe:TextEdit Grid.Row="2" Grid.Column="1" Margin="10,5,10,5" />
+                            <Label Content="{StaticResource str_Phone}" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Margin="5,5,5,5"/>
+                            <dxe:TextEdit Grid.Row="2" Grid.Column="3" Margin="10,5,10,5" Text="{Binding Path=Phone}"/>
 
-                            <Label Content="Phone:" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Margin="5,5,5,5"/>
-                            <dxe:TextEdit Grid.Row="2" Grid.Column="3" Margin="10,5,10,5" />
-
-                            <Label Content="Web Site:" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" Margin="5,5,5,5"/>
-                            <dxe:TextEdit Grid.Row="3" Grid.Column="1" Margin="10,5,10,5" />
+                            <Label Content="{StaticResource str_WebSite}" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" Margin="5,5,5,5"/>
+                            <dxe:TextEdit Grid.Row="3" Grid.Column="1" Margin="10,5,10,5" Text="{Binding Path=WebSite}"/>
 
                             <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="1">
-                                <Button Content="Save" HorizontalAlignment="Right" Margin="10,10,5,5" Width="100"/>
-                                <Button Content="Cancel" HorizontalAlignment="Right" Margin="10,10,5,5" />
+                                <Button Name="btnSave" Content="{StaticResource str_Save}" HorizontalAlignment="Right" Margin="10,10,5,5" Width="100" Click="btnSave_Click"/>
+                                <Button Name="btnCancel" Content="{StaticResource str_Cancel}" HorizontalAlignment="Right" Margin="10,10,5,5" Click="btnCancel_Click" />
                             </StackPanel>
                         </Grid>
                     </GroupBox>

@@ -4,13 +4,16 @@
     <!--Button 文本-->
     <sys:String x:Key="str_Ok">Ok</sys:String>
     <sys:String x:Key="str_Cancel">Cancel</sys:String>
-    <sys:String x:Key="str_Add">AddModel</sys:String>
-    <sys:String x:Key="str_Edit">EditModel</sys:String>
+    <sys:String x:Key="str_AddModel">Add Model</sys:String>
+    <sys:String x:Key="str_EditModel">Edit Model</sys:String>
     <sys:String x:Key="str_Save">Save</sys:String>
-    <sys:String x:Key="str_Delete">DeleteMode</sys:String>
+    <sys:String x:Key="str_DeleteModel">Delete Model</sys:String>
+    <sys:String x:Key="str_QueryModel">Query Model</sys:String>
     <sys:String x:Key="str_Query">Query</sys:String>
-    <sys:String x:Key="Clear">Clear</sys:String>
-    
+    <sys:String x:Key="str_Clear">Clear</sys:String>
+    <sys:String x:Key="str_Add">Add</sys:String>
+    <sys:String x:Key="str_Edit">Edit</sys:String>
+
     <!--Label 文本-->
     <!--AJ DMES Package Operation 界面标签文本-->
     <sys:String x:Key="str_DelphiPN">Delphi PN:</sys:String>
@@ -42,7 +45,7 @@
     <!--AJ DMES Customer 界面标签文本-->
     <sys:String x:Key="str_CustomerCode">Cusomer Code:</sys:String>
     <sys:String x:Key="str_CustomerName">Customer Name:</sys:String>
-    <sys:String x:Key="str_National">National:</sys:String>
+    <sys:String x:Key="str_Country">Country:</sys:String>
     <sys:String x:Key="str_ShortName">Short Name:</sys:String>
     <sys:String x:Key="str_Address">Address:</sys:String>
     <sys:String x:Key="str_Phone">Phone:</sys:String>
@@ -51,4 +54,11 @@
     <!--AJ DMES Traceability 界面标签文本-->
     <sys:String x:Key="str_Line">Line:</sys:String>
     <sys:String x:Key="str_Customer">Customer:</sys:String>
+    
+    <!--AJ Dmes UserManagementView 界面标签文本-->
+    <sys:String x:Key="str_UserName">UserName:</sys:String>
+    <sys:String x:Key="str_RealName">RealName:</sys:String>
+    <sys:String x:Key="str_Age">Age:</sys:String>
+    <sys:String x:Key="str_Gender">Gender:</sys:String>
+    <sys:String x:Key="str_Password">Password:</sys:String>
 </ResourceDictionary>

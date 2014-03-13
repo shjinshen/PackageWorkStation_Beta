@@ -25,5 +25,7 @@ namespace AJ.DMES.PackageWorkstation.Manager
         Model Get(object id);
         void Delete(Model entity);
         IList<Model> Find(string hql);
+        IList<Domain.Model> QuerySomeModel(Domain.Model p_model);
+         IList<Domain.Model> GetAllModels();
     }
 }

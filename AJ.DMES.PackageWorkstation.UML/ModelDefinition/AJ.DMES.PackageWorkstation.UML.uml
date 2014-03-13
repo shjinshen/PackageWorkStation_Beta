@@ -1073,24 +1073,6 @@
             </type_NamedElement>
           </property>
           <property
-            Id="0bb1161f-52dc-452c-a2e1-b9113408d439"
-            name="Remark"
-            isLeaf="false"
-            isStatic="false"
-            isReadOnly="false"
-            isUnique="false"
-            isDerived="false"
-            isDerivedUnion="false"
-            aggregation="None"
-            isComposite="false">
-            <type_NamedElement>
-              <primitiveTypeMoniker
-                Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
-                LastKnownName="String"
-                LastKnownLocation="AJ.DMES.PackageWorkstation.UML.uml" />
-            </type_NamedElement>
-          </property>
-          <property
             Id="1ee4fa40-11f3-4289-9555-bbc63467e268"
             name="RealName"
             isLeaf="false"

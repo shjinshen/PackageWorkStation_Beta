@@ -424,12 +424,6 @@
               <referencedTypeMoniker Id="9cca78b6-b1f3-4bcd-8c3d-997845e89b78" LastKnownName="String" />
             </type_NamedElement>
           </property>
-          <property Id="41645136-c444-4cf7-9b63-6626e7fa5f85" name="Remark" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-            <elementDefinition Id="0bb1161f-52dc-452c-a2e1-b9113408d439" />
-            <type_NamedElement>
-              <referencedTypeMoniker Id="6be69c93-b8f5-4c1e-8660-c3dff7e26abc" LastKnownName="String" />
-            </type_NamedElement>
-          </property>
           <property Id="f450f1eb-89e7-45f9-b6a5-84c97c2a3d05" name="RealName" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="1ee4fa40-11f3-4289-9555-bbc63467e268" />
             <type_NamedElement>
@@ -441,11 +435,6 @@
     </logicalClassDesignerModelHasTypes>
     <packageHasNamedElement>
       <referencedType Id="3bce3f14-993c-4c81-a09b-e51f309b207b" name="String" isAbstract="false" isLeaf="false" cachedFullName="String">
-        <elementDefinition Id="59259974-6d55-42c6-b7bd-763d77ac8ef9" />
-      </referencedType>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
-      <referencedType Id="6be69c93-b8f5-4c1e-8660-c3dff7e26abc" name="String" isAbstract="false" isLeaf="false" cachedFullName="String">
         <elementDefinition Id="59259974-6d55-42c6-b7bd-763d77ac8ef9" />
       </referencedType>
     </packageHasNamedElement>

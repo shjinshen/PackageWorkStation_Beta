@@ -14,6 +14,7 @@
     <!--Individul properties-->
     <property name="CustomerCode" unique="true" length="20"/>
     <property name="CustomerName" length="50"/>
+    <property name="Country" length="20"/>
     <property name="ShortName" length="20"/>
     <property name="Address" length="100"/>
     <property name="Phone" length="20"/>

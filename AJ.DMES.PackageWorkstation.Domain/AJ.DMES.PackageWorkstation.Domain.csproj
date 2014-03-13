@@ -54,7 +54,9 @@
     <EmbeddedResource Include="Mapping\Customer.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Mapping\Model.hbm.xml" />
+    <EmbeddedResource Include="Mapping\Model.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Mapping\Container.hbm.xml" />

@@ -25,5 +25,11 @@ namespace AJ.DMES.PackageWorkstation.Manager
         Customer Get(object id);
         void Delete(Customer entity);
         IList<Customer> Find(string hql);
+        /// <summary>
+        /// 模糊查找客户
+        /// </summary>
+        /// <param name="p_entity"></param>
+        /// <returns></returns>
+        IList<Customer> FuzzySearch(Customer p_entity);
     }
 }

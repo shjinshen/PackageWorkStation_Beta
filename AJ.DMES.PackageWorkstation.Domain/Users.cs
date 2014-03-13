@@ -13,6 +13,6 @@ namespace AJ.DMES.PackageWorkstation.Domain
         public virtual string Gender { get; set; }
         public virtual string Age { get; set; }
         public virtual string Phone { get; set; }
-        public virtual string Remark { get; set; }
+		public virtual string Remark { get; set; }
     }
 }

@@ -21,6 +21,7 @@ namespace AJ.DMES.PackageWorkstation.Manager
     public class ModelManager : IModelManager
     {
         public IRepository<Model> ModelRepository { get; set; }
+       
 
         public object Save(Domain.Model entity)
         {
@@ -29,27 +30,57 @@ namespace AJ.DMES.PackageWorkstation.Manager
 
         public void SaveOrUpdate(Domain.Model entity)
         {
-            throw new NotImplementedException();
+             ModelRepository.SaveOrUpdate(entity);
         }
 
         public void Update(Domain.Model entity)
         {
-            throw new NotImplementedException();
+            ModelRepository.Update(entity);
         }
 
         public Domain.Model Get(object id)
         {
-            throw new NotImplementedException();
-        }
+            return ModelRepository.Get(id);
+            
+       }
 
         public void Delete(Domain.Model entity)
         {
-            throw new NotImplementedException();
+            ModelRepository.Delete(entity);
         }
 
         public IList<Domain.Model> Find(string hql)
         {
-            throw new NotImplementedException();
+            return ModelRepository.Find(hql);
+        }
+
+        public IList<Domain.Model> GetAllModels()
+        {
+             List<Domain.Model> lstModels= (List<Domain.Model>)Find("from Model");
+               return lstModels;
+          
+        }
+
+        public IList<Domain.Model> QuerySomeModel(Domain.Model p_model)
+        {
+            string hql = "from Model m  where 1=1 ";
+            string where = "";
+            if(!String.IsNullOrEmpty(p_model.CPN))
+            {
+                where +=string.Format( " and m.CPN like '%{0}%' ",p_model.CPN);
+            }
+
+            if(!string.IsNullOrEmpty(p_model.ModelName))
+            {
+             where+=string.Format("  and m.ModelName  like '%{0}%' ",p_model.ModelName);
+            }
+
+            if(p_model.Customer!=null)
+            {
+                where += string.Format(" and m.Customer.Id='{0}'",p_model.Customer.Id.ToString());
+            }
+
+            return Find(hql+where);
         }
     }
 }

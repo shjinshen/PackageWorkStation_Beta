@@ -13,6 +13,8 @@ namespace AJ.DMES.PackageWorkstation.Manager
         void Update(Users entity);
         Users Get(object id);
         void Delete(Users entity);
+        IList<Users> FindAll();
         IList<Users> Find(string hql);
+        IList<Users> FindSome(Users user);
     }
 }
