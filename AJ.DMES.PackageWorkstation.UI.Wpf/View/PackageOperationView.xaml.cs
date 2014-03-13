@@ -21,18 +21,15 @@ namespace AJ.DMES.PackageWorkstation.UI.Wpf.View
     /// </summary>
     public partial class PackageOperationView : UserControl
     {
+        //界面缓存的对象
         private int stepNo = 0;//步骤号，1.扫描DPN 2.扫描SN 3.扫描Qty 4.反复扫描CPN 5.封箱
-
         private Model currentModel;
-
         private Container currentContainer;//当前工作的包装箱
-
         private int currentQty = 0;//当前包装的数量
 
+        //使用的Manager
         private IList<ModelInstance> modelInstanceList;
-
         private IModelManager modelManager;
-
         private IContainerManager containerManager;
 
         public PackageOperationView()
@@ -56,6 +53,8 @@ namespace AJ.DMES.PackageWorkstation.UI.Wpf.View
                 txtScanBox.Focus();
                 stepNo = 1;
                 SetStepLabel();
+                //显示等待扫描信息
+                UpdateMessage("Waiting Scan");
             }
             catch (Exception ex)
             { 
@@ -114,19 +113,26 @@ namespace AJ.DMES.PackageWorkstation.UI.Wpf.View
         {
             //不是回车键，则不做任何处理
             if (e.Key != Key.Enter) return;
+
+            //操作结果
+            bool result = false;
+
             switch (stepNo)
             { 
                 case 1:
-                    ScanDPN(txtScanBox.Text);
+                    result = ScanDPN(txtScanBox.Text);
                     break;
                 case 2:
-                    ScanSN(txtScanBox.Text);
+                    result = ScanSN(txtScanBox.Text);
                     break;
                 case 3:
-                    ScanQty(txtScanBox.Text);
+                    result = ScanQty(txtScanBox.Text);
                     break;
                 case 4:
-                    ScanCPN(txtScanBox.Text);
+                    result = ScanCPN(txtScanBox.Text);
+                    break;
+                case 5:
+                    result = CloseContainer(txtScanBox.Text);
                     break;
             }
 
@@ -168,7 +174,8 @@ namespace AJ.DMES.PackageWorkstation.UI.Wpf.View
             UpdateModelInfo();
             //5.切换步骤号
             stepNo = 2;
-      
+
+            UpdateMessage("Scan container SN");
             return true;
         }
 
@@ -181,6 +188,10 @@ namespace AJ.DMES.PackageWorkstation.UI.Wpf.View
             string prefix = "3s";//序列号的前缀，后面需要从配置信息中读取
             //1.获得序列号
             string sn = FilterPrefix(barcode, prefix);
+            if (string.IsNullOrEmpty(sn))
+            {
+                return false;
+            }
             //2.根据sn获得包装箱
             currentContainer = containerManager.Get(sn);
             if (currentContainer == null) CreateContainer(sn);//如果没有新建一个包装箱
@@ -204,6 +215,7 @@ namespace AJ.DMES.PackageWorkstation.UI.Wpf.View
             //4.递进步骤号
             stepNo = 3;
 
+            UpdateMessage("Scan container quatity");
             return true;
         }
 
@@ -211,22 +223,31 @@ namespace AJ.DMES.PackageWorkstation.UI.Wpf.View
         /// Step3.扫描qty条码操作
         /// </summary>
         /// <param name="barcode"></param>
-        private void ScanQty(string barcode)
+        private bool ScanQty(string barcode)
         {
-            string prefix = "q";//数量条码的前缀，后面需要从配置信息中读取
-            int qty = int.Parse(FilterPrefix(barcode, prefix));
-            lblContainerQty.Content = qty;
-            currentContainer.ContainerSize = qty;
-            currentQty = 0;
-            UpdateQtyInfo();
-            stepNo = 4;
+            try
+            {
+                string prefix = "q";//数量条码的前缀，后面需要从配置信息中读取
+                int qty = int.Parse(FilterPrefix(barcode, prefix));
+                lblContainerQty.Content = qty;
+                currentContainer.ContainerSize = qty;
+                currentQty = 0;
+                UpdateQtyInfo();
+                stepNo = 4;
+                UpdateMessage("Scan custoemr CPN");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         /// <summary>
         /// Step4.扫描产品2D条码
         /// </summary>
         /// <param name="barcode"></param>
-        private void ScanCPN(string barcode)
+        private bool ScanCPN(string barcode)
         { 
             //1.切分2维条码，将其填入ModelInstance实体中
             ModelInstance mInstance = new ModelInstance();
@@ -243,9 +264,42 @@ namespace AJ.DMES.PackageWorkstation.UI.Wpf.View
             UpdatePackedList();
 
             //4.判断是否已经满箱
-            if (currentQty == currentContainer.ContainerSize) stepNo = 5;//如果已经满箱，则转到封箱操作
+            if (currentQty == currentContainer.ContainerSize)
+            {
+                stepNo = 5;//如果已经满箱，则转到封箱操作
+                UpdateMessage("Rescan DPN");
+            }
+
+            return true;
         }
-        
+
+        /// <summary>
+        /// 封箱操作
+        /// </summary>
+        /// <param name="barcode"></param>
+        /// <returns></returns>
+        private bool CloseContainer(string barcode)
+        {
+            string prefix = "1p";
+            string dpn = FilterPrefix(barcode, prefix);
+
+            try
+            {
+                //1.对比此次输入的dpn与箱号是否一致
+                if (!currentContainer.ContainerPN.Equals(dpn)) return false;
+                //2.如果一样，表示是同一个外箱，进行封箱操作（保存外箱信息，并将记录外箱与ModelInstance的关系）
+                currentContainer.ContainerStatus = (int)EContainerStatus.Closed;
+                containerManager.Save(currentContainer);
+                //3.清空界面与缓存的对象
+                ClearForm();
+            }
+            catch (Exception ex)
+            { 
+            
+            }
+
+            return true;
+        }
 
         /// <summary>
         /// 把条码中的前缀去掉
@@ -283,16 +337,56 @@ namespace AJ.DMES.PackageWorkstation.UI.Wpf.View
             lblCustomerPN.Content = currentContainer.CustomerPN;
         }
 
+        /// <summary>
+        /// 更新当前包装的数量
+        /// </summary>
         private void UpdateQtyInfo()
         {
             lblPackedQty.Content = currentQty;
         }
 
+        /// <summary>
+        /// 更新Packed List
+        /// </summary>
         private void UpdatePackedList()
         {
             lsPackedProduct.ItemsSource = null;
             lsPackedProduct.ItemsSource = modelInstanceList;
             lsPackedProduct.DisplayMember = "ProductCode";
+        }
+
+        /// <summary>
+        /// 操作提示信息更新
+        /// </summary>
+        private void UpdateMessage(string msg)
+        {
+            lblMessage.Content = msg;
+        }
+
+        private void UpdateContainerStatus(int status)
+        { 
+            
+        }
+
+        /// <summary>
+        /// 清理界面及缓存
+        /// </summary>
+        private void ClearForm()
+        {
+            currentContainer = null;
+            currentModel = null;
+            currentQty = 0;
+            modelInstanceList = null;
+            stepNo = 1;
+
+            lblPackedQty.Content = "-";
+            lblContainerQty.Content = "-";
+            lblContianerSN.Content = "-";
+            lblCustomerPN.Content = "-";
+            txtCPN.Text = "";
+            txtDelphiPN.Text = "";
+            txtDescription.Text = "";
+            lsPackedProduct.ItemsSource = null;
         }
     }
 }
